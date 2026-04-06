@@ -18,7 +18,8 @@ def instalar_pacotes():
 
     subprocess.check_call([sys.executable, "-m", "playwright", "install"])
 
-instalar_pacotes()
+if __name__ == "__main__":
+    instalar_pacotes()
 
 from telethon import TelegramClient, events
 import requests
@@ -343,7 +344,7 @@ async def gerar_link_afiliado_ml(link_original):
 
             context = await p.chromium.launch_persistent_context(
                 user_data_dir="./perfil-playwright",
-                headless=False
+                headless=True
             )
 
             page = await context.new_page()
@@ -404,7 +405,7 @@ async def gerar_link_afiliado_amazon(link_original):
         async with async_playwright() as p:
             context = await p.chromium.launch_persistent_context(
                 user_data_dir="./perfil-playwright",
-                headless=False
+                headless=True
             )
 
             page = await context.new_page()
@@ -725,3 +726,6 @@ async def main():
         print("✅ Já autorizado")
 
     await client.run_until_disconnected()
+
+if __name__ == "__main__":
+    asyncio.run(main())
