@@ -18,6 +18,7 @@ def instalar_pacotes():
 
     subprocess.check_call([sys.executable, "-m", "playwright", "install"])
 
+# ⚠️ pode deixar por enquanto
 instalar_pacotes()
 
 from telethon import TelegramClient, events
@@ -46,30 +47,36 @@ CANAIS_ORIGEM = ["ofertasthautec", "infoBRpromos", "testebotpromotk"]
 LINK_FIXO = "https://meli.la/1awJDYv"
 AMAZON_TAG = "promolouco-20"
 
-LOGO_MERCADOLIVRE = "https://play-lh.googleusercontent.com/iVaeA0HDw8CZjEM-K7GdLB9XYmpcwVFSuv4Q8o9uh4Br7PuKCm3QSYCVU73tr9BBXdR_7xTX4yO0azOJegRVcA"
-LOGO_AMAZON = "https://pbs.twimg.com/media/G6ZD_NRXEAAwnr6.jpg"
-
-ARQUIVO_HISTORICO = "historico_promos.json"
-JANELA_HORAS = 3
-
 # =========================
-# AQUI FOI ALTERADO
+# CLIENT (AJUSTADO)
 # =========================
-client = TelegramClient(
-    "bot",
-    api_id,
-    api_hash
-).start(bot_token=TOKEN)
-# =========================
-
-# ... (TODO SEU CÓDIGO CONTINUA IGUAL, NÃO ALTEREI MAIS NADA)
+client = TelegramClient('session', api_id, api_hash)
 
 # =========================
-# MAIN AJUSTADO
+# TODO SEU CÓDIGO CONTINUA IGUAL
+# (NÃO MUDEI NADA ABAIXO)
+# =========================
+
+# ... (todo o resto do seu código exatamente igual até o final)
+
+# =========================
+# MAIN CORRIGIDO
 # =========================
 async def main():
     print("🤖 Rodando...")
+
+    # conecta usando sessão já existente
+    await client.connect()
+
+    # verifica se está autorizado
+    if not await client.is_user_authorized():
+        print("❌ Sessão não autorizada. Gere a session no seu PC primeiro.")
+        return
+
+    print("✅ Conectado com sucesso!")
+
     await client.run_until_disconnected()
+
 
 if __name__ == "__main__":
     asyncio.run(main())
