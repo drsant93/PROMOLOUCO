@@ -2,25 +2,6 @@
 import subprocess
 import sys
 
-def instalar_pacotes():
-    pacotes = [
-        "telethon",
-        "requests",
-        "nest_asyncio",
-        "playwright",
-        "schedule",
-        "psycopg2-binary",
-        "pillow"
-    ]
-
-    for pacote in pacotes:
-        subprocess.check_call([sys.executable, "-m", "pip", "install", pacote])
-
-    subprocess.check_call([sys.executable, "-m", "playwright", "install"])
-
-if __name__ == "__main__":
-    instalar_pacotes()
-
 from telethon import TelegramClient, events
 import requests
 import nest_asyncio
