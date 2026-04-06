@@ -175,7 +175,7 @@ async def expandir_link(url):
 async def expandir_link_playwright(url):
     try:
         async with async_playwright() as p:
-            browser = await p.chromium.launch(headless=True)
+            browser = await p.chromium.launch(headless=False)
             page = await browser.new_page()
             await page.goto(url, wait_until="load", timeout=30000)
             await page.wait_for_timeout(3000)
@@ -325,7 +325,7 @@ async def gerar_link_afiliado_ml(link_original):
 
             context = await p.chromium.launch_persistent_context(
                 user_data_dir="./perfil-playwright",
-                headless=True
+                headless=False
             )
 
             page = await context.new_page()
@@ -386,7 +386,7 @@ async def gerar_link_afiliado_amazon(link_original):
         async with async_playwright() as p:
             context = await p.chromium.launch_persistent_context(
                 user_data_dir="./perfil-playwright",
-                headless=True
+                headless=False
             )
 
             page = await context.new_page()
